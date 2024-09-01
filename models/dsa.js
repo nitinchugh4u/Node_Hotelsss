@@ -1,30 +1,30 @@
-// const arr = [
-//   15, 5, 5, 6, 7, 8, 3, 4, 4, 5, 6, 7, 8, 5, 4, 3, 5, 6, 6, 7, 7, 8, 8,
-// ];
-// // 3d largest
-// for (let i = 0; i < arr.length; i++) {
-//   for (let j = i + 1; j < arr.length; j++) {
-//     if (arr[i] === arr[j]) {
-//       arr.splice(j, 1);
-//       j--;
-//     }
-//   }
-// }
+const arr = [
+  15, 5, 5, 6, 7, 8, 3, 4, 4, 5, 6, 7, 8, 5, 4, 3, 5, 6, 6, 7, 7, 8, 8,
+];
+// 3d largest
+for (let i = 0; i < arr.length; i++) {
+  for (let j = i + 1; j < arr.length; j++) {
+    if (arr[i] === arr[j]) {
+      arr.splice(j, 1);
+      j--;
+    }
+  }
+}
 
-// console.log(arr);
-// let temp;
-// for (let i = 0; i < arr.length; i++) {
-//   for (let j = i + 1; j < arr.length; j++) {
-//     if (arr[i] < arr[j]) {
-//       temp = arr[i];
-//       arr[i] = arr[j];
-//       arr[j] = temp;
-//     }
-//   }
-// }
-// console.log(arr);
+console.log(arr);
+let temp;
+for (let i = 0; i < arr.length; i++) {
+  for (let j = i + 1; j < arr.length; j++) {
+    if (arr[i] < arr[j]) {
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+  }
+}
+console.log(arr);
 
-// console.log(arr[2]);
+console.log(arr[2]);
 
 
 
@@ -96,6 +96,7 @@
 // let str = ""
 // let first 
 // // let second
+
 // for(let i =1; i<=n;i++){
 
 //     for(let space =i; space<n;space++){
