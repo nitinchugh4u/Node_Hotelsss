@@ -4,8 +4,9 @@ require("dotenv").config();
 // defien the Mongobd conenction url
 // const mongoURL = 'mongodb://127.0.0.1:27017/hotelsss'  //hotells is your database name
 // const mongoURL = "mongodb+srv://nitinchugh4u:Nitin12345@cluster0.ele4y.mongodb.net/"
-const mongoURL = process.env.MONGODB_URL;
-// const mongoURL = process.env.MONGODB_URL_LOCAL
+// const mongoURL = process.env.MONGODB_URL;
+const mongoURL = process.env.MONGODB_URL_LOCAL
+
 
 // mongoose.connect(mongoURL, {
 //   useNewUrlParser: true,
@@ -13,6 +14,9 @@ const mongoURL = process.env.MONGODB_URL;
 // });
 
 mongoose.connect(mongoURL);
+
+
+
 
 
 //get the default connection

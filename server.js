@@ -37,16 +37,57 @@
 var express = require("express");
 var app = express();
 const db = require("./db");
-require('dotenv').config()
-const PORT = process.env.PORT || 3000;
+require("dotenv").config();
+// const passport = require("passport");
+const passport = require("./auth");
 
+// const LocalStrategy = require("passport-local").Strategy; //username and password authentication
+// const PORT = process.env.PORT || 3000;
+//node js host link
+// https://hotels-gz6w.onrender.com
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-const Person = require("./models/Person");
+const PORT = process.env.PORT || 3000;
+
+// const Person = require("./models/Person");
 
 const MenuItem = require("./models/MenuItem");
 
+// middle ware functiom
+const logRequest = (req, res, next) => {
+  console.log(
+    `[${new Date().toLocaleString()}] Request made to ${req.originalUrl}`
+  );
+  next(); //move on to the next phase
+};
+app.use(logRequest);
+
+// passport.use(
+//   new LocalStrategy(async (USERNAME, password, done) => {
+//     //authentication logic here
+
+//     try {
+//       console.log("Recieved Credentials", USERNAME, password);
+//       const user = await Person.findOne({ username: USERNAME });
+
+//       if (!user) return done(null, false, { message: "Incorrect username" });
+//       const isPasswordMatch = user.password === password ? true : false;
+//       if (isPasswordMatch) {
+//         return done(null, user);
+//       } else {
+//         return done(null, false, { message: "Incorrect  password." });
+//       }
+//     } catch (err) {
+//       return done(err);
+//     }
+//   })
+// );
+
+app.use(passport.initialize());
+const localAuthMiddleware=passport.authenticate('local',{session:false})
+
+// app.get("/",logRequest,(req, res) => {
 app.get("/", (req, res) => {
   res.send("welcome to our hotel and here is the menu");
 });
@@ -150,21 +191,18 @@ app.get("/", (req, res) => {
 
 // })
 
-
 // import the router files
 
-const personRoutes  = require('./routes/personRoutes')
-const menuItemRoutes = require('./routes/menuItemsRoutes')
+const personRoutes = require("./routes/personRoutes");
+const menuItemRoutes = require("./routes/menuItemsRoutes");
 
 //use the router
-app.use('/person',personRoutes)
-app.use('/menuItem',menuItemRoutes)
-
-
-
+app.use("/person",localAuthMiddleware, personRoutes);
+app.use("/menuItem", menuItemRoutes);
+// localAuthMiddleware
 
 // app.listen(3000);
 
-app.listen(PORT,()=>{
-  console.log('listening on Port 3000')
+app.listen(PORT, () => {
+  console.log("listening on Port 3000");
 });
